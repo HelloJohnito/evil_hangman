@@ -10,6 +10,11 @@
 
 @interface ViewController : UIViewController
 
+@property(strong, nonatomic) UILabel *word;
+@property(strong, nonatomic) UITextField *userInput;
+@property(strong, nonatomic) UIButton *button;
+
+-(void)submit;
 
 @end
 

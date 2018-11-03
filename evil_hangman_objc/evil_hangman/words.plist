@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>3</key>
+	<array>
+		<string>ace</string>
+		<string>ape</string>
+		<string>ate</string>
+		<string>att</string>
+		<string>bad</string>
+		<string>bat</string>
+		<string>but</string>
+		<string>bid</string>
+		<string>cup</string>
+		<string>cat</string>
+		<string>ccp</string>
+		<string>zip</string>
+		<string>pie</string>
+		<string>pig</string>
+		<string>pan</string>
+	</array>
+	<key>4</key>
+	<array>
+		<string>nest</string>
+		<string>cast</string>
+		<string>bass</string>
+		<string>ants</string>
+		<string>fact</string>
+		<string>lack</string>
+		<string>pale</string>
+		<string>past</string>
+		<string>more</string>
+		<string>plus</string>
+		<string>east</string>
+		<string>west</string>
+		<string>keys</string>
+		<string>dope</string>
+		<string>weet</string>
+	</array>
+</dict>
+</plist>
