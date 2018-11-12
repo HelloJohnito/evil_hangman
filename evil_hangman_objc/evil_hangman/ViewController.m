@@ -15,6 +15,8 @@
 }
 -(NSMutableDictionary*)partitionWord: (NSString*)userInput;
 -(NSString*)convertArrayToString: (NSArray*)currentWord;
+-(NSMutableArray*)convertStringToArray: (NSString*) currentWord;
+-(void)setDisplayLabelAndListOfWord: (NSMutableDictionary*)partitionedDic;
 @end
 
 @implementation ViewController
@@ -55,19 +57,14 @@
     
     for(int i = 0; i < [listOfWords count]; i++){
         NSString* currentWordFromList = [listOfWords objectAtIndex:i];
-        tempArray = [[NSMutableArray alloc] init];
+        tempArray = [currentWordArray mutableCopy];
         for(int j = 0; j < [currentWordFromList length]; j++){
             NSString *currentLetter = [currentWordFromList substringWithRange:NSMakeRange(j, 1)];
             if(currentLetter == userInput){
-                [tempArray addObject: currentLetter];
-            }
-            else {
-                [tempArray addObject:@"_"];
+                [tempArray replaceObjectAtIndex: j withObject: currentLetter];
             }
         }
         NSString* stringWordForKey = [self convertArrayToString: tempArray];
-//        NSLog(@"%@", stringWordForKey);
-        
         
         if([dictionary objectForKey: stringWordForKey]){
             [[dictionary valueForKey:stringWordForKey] addObject: currentWordFromList];
@@ -83,13 +80,32 @@
 
 - (void)submit{
     NSString *letter = [self.userInput.text lowercaseString];
-    [self partitionWord:letter];
+    NSMutableDictionary *partitionedDictionary = [self partitionWord:letter];
+    [self setDisplayLabelAndListOfWord: partitionedDictionary];
+    _word.text = [self convertArrayToString: currentWordArray];
+    _userInput.text = @"";
+    NSLog(@"%@",listOfWords);
+}
+
+- (void) setDisplayLabelAndListOfWord: (NSMutableDictionary*)partitionedDic {
+    int count = 0;
+    NSArray *tempWordList;
+    NSString* tempDisplayWord;
+    for(NSString *key in partitionedDic) {
+        NSArray *words = [partitionedDic objectForKey:key];
+        if(count < [words count]){
+            count = (int)[words count];
+            tempWordList = words;
+            tempDisplayWord = key;
+        }
+    }
+    listOfWords = tempWordList;
+    currentWordArray = [self convertStringToArray: tempDisplayWord];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
     float wordWidth = 320;
     float wordHeight = 50;
     float wordXPos = ((self.view.frame.size.width/2) - (wordWidth/2));
@@ -135,7 +151,7 @@
     int length = (int)[currentWord count];
     for(int i = 0; i < length; i++){
         if(i != length - 1){
-            NSString* letter = [[currentWord objectAtIndex: i] stringByAppendingString: @"  "];
+            NSString* letter = [[currentWord objectAtIndex: i] stringByAppendingString: @" "];
             word = [word stringByAppendingString: letter];
         }
         else{
@@ -143,6 +159,17 @@
         }
     }
     return word;
+}
+
+- (NSMutableArray*)convertStringToArray: (NSString*) currentWord{
+    NSMutableArray* tempWordArray = [[NSMutableArray alloc] init];
+    for(int i = 0; i<[currentWord length]; i++){
+        NSString *letter = [currentWord substringWithRange:NSMakeRange(i, 1)];
+        if(![letter isEqualToString:@" "]){
+            [tempWordArray addObject: letter];
+        }
+    }
+    return tempWordArray;
 }
 
 @end

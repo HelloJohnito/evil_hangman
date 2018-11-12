@@ -15,6 +15,5 @@
 @property(strong, nonatomic) UIButton *button;
 
 -(void)submit;
-
 @end
 
